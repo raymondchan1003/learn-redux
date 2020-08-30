@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { loadImages } from "../../actions";
 import { connect, useSelector, useDispatch } from "react-redux";
 import Button from "../Button";
+import Stats from "../Stats"
 
 import "./style.css";
 
@@ -18,7 +19,7 @@ class ImageGrid extends Component {
   }
 
   render() {
-    const { imagesss, errorrr, isLoadinggg, loadImagess } = this.props; //destructure from props
+    const { imagesss, errorrr, isLoadinggg, loadImagess, imageStatss } = this.props; //destructure from props
     return (
       <div className="content">
         <section className="grid">
@@ -27,6 +28,7 @@ class ImageGrid extends Component {
               key={image.id}
               className={`item item-${Math.ceil(image.height / image.width)}`}
             >
+              <Stats stats={imageStatss[image.id]}/>
               <img src={image.urls.small} alt={image.user.username} />
             </div>
           ))}
@@ -43,10 +45,11 @@ class ImageGrid extends Component {
   }
 }
 
-const mapStateToProps = ({ isLoading, images, error }) => ({
+const mapStateToProps = ({ isLoading, images, error, imageStats }) => ({
   isLoadinggg: isLoading,
   imagesss: images,
   errorrr: error,
+  imageStatss:imageStats
 });
 
 const mapDispatchToProps = (dispatch) => ({

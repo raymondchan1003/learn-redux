@@ -1,6 +1,15 @@
+import {all} from "redux-saga/effects"; 
 import imagesSaga from "./imagesSaga";
+import statsSaga from "./statsSaga";
 
-export default imagesSaga;
+function* rootSaga(){
+  yield all([
+    imagesSaga(),
+    statsSaga()
+  ]);
+}
+
+export default rootSaga;
 
 /*import { IMAGES } from "../constants";
 import { takeEvery, take, put, call } from "redux-saga/effects"; //effects gt 2 types, one is blocking call like take(), one is non-blocking call like takeEvery()
